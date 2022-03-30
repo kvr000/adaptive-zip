@@ -16,11 +16,11 @@
 
 package com.github.kvr000.adaptivezip;
 
-import com.github.kvr000.adaptivezip.concurrent.CapacityResultSerializingExecutor;
 import com.github.kvr000.adaptivezip.io.AntPathMatcher;
 import com.github.kvr000.adaptivezip.io.AnyOfPathMatcher;
 import com.github.kvr000.adaptivezip.io.Crc32CalculatingInputStream;
 import net.dryuf.concurrent.FutureUtil;
+import net.dryuf.concurrent.executor.CapacityResultSerializingExecutor;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -89,7 +89,9 @@ public class AdaptiveZip {
 					.longOpt("ignore-pattern")
 					.desc("Filename pattern to ignore")
 					.hasArg(true)
+					.numberOfArgs(1)
 					.hasArgs()
+					.numberOfArgs(1)
 					.type(String.class)
 					.build()
 				)
@@ -97,6 +99,7 @@ public class AdaptiveZip {
 					.longOpt("store-pattern")
 					.desc("Filename pattern to avoid compression (can be multiple)")
 					.hasArg(true)
+					.numberOfArgs(1)
 					.hasArgs()
 					.type(String.class)
 					.build()

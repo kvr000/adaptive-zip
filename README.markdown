@@ -8,7 +8,8 @@ Compressing zip utility which adapts the compression methods according to file t
 usage: Usage: AdaptiveZip [options] zip-filename source-directories-roots...
  -h                         Help
     --deflate-level <arg>   Compression level for deflate method
-    --store-pattern <arg>   Filename pattern to avoid compression (can be multiple)
+    --ignore-pattern <arg>  Path ant-syntax pattern to ignore files (can be multiple)
+    --store-pattern <arg>   Path ant-syntax pattern to avoid compression (can be multiple)
     --store-ratio <arg>     Ratio (percentage of compressed to original) to avoid compression, default is 90
 ```
 
@@ -19,12 +20,21 @@ compression for `*.class` and `*.gz` files or, for anything where the achieved c
 original size.
 
 ```
-java -jar target/AdaptiveZip.jar --deflate-level 9 --store-pattern '*.class' --store-pattern '*.gz' --store-ratio 90 target/a.zip src/main/java/ target/classes/
-Adding com/github/kvr000/adaptivezip/AdaptiveZip.java (28%)
-Adding com/github/kvr000/adaptivezip/io/Crc32CalculatingInputStream.java (38%)
-Adding com/github/kvr000/adaptivezip/AdaptiveZip$Arguments.class (100%)
-Adding com/github/kvr000/adaptivezip/AdaptiveZip.class (100%)
-Adding com/github/kvr000/adaptivezip/io/Crc32CalculatingInputStream.class (100%)
+java -jar target/AdaptiveZip.jar --deflate-level 9 --ignore-pattern '**/target/**/*' --store-pattern '**/*.class' --store-pattern '**/*.gz' --store-ratio 10 target/a.zip src/main/java/ target/classes/
+Adding com/github/kvr000/adaptivezip/AdaptiveZip.java (70%)
+Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor.java (72%)
+Adding com/github/kvr000/adaptivezip/io/AntPathMatcher.java (0%)
+Adding com/github/kvr000/adaptivezip/io/AnyOfPathMatcher.java (50%)
+Adding com/github/kvr000/adaptivezip/io/Crc32CalculatingInputStream.java (55%)
+Adding com/github/kvr000/adaptivezip/AdaptiveZip$Arguments.class (69%)
+Adding com/github/kvr000/adaptivezip/AdaptiveZip.class (63%)
+Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor$1.class (0%)
+Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor$ExecutionFuture$1.class (61%)
+Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor$ExecutionFuture.class (70%)
+Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor.class (64%)
+Adding com/github/kvr000/adaptivezip/io/AntPathMatcher.class (0%)
+Adding com/github/kvr000/adaptivezip/io/AnyOfPathMatcher.class (56%)
+Adding com/github/kvr000/adaptivezip/io/Crc32CalculatingInputStream.class (0%)
 ```
 
 ## License

@@ -44,6 +44,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
@@ -225,6 +226,9 @@ public class AdaptiveZip {
 					else if (Files.isRegularFile(root)) {
 						return Stream.of(new ImmutablePair<>(root, root));
 					}
+					else if (Files.notExists(root, LinkOption.NOFOLLOW_LINKS)) {
+						throw new IllegalArgumentException("File does not exist: "+root);
+					}
 					else {
 						return Stream.empty();
 					}
@@ -233,8 +237,6 @@ public class AdaptiveZip {
 					throw new UncheckedIOException(e);
 				}
 			})
-			// this line ensures file parallelism which is effectively disabled by low number of
-			// very original input
 			.collect(Collectors.toList());
 		return files;
 	}

@@ -20,7 +20,7 @@ import com.github.kvr000.adaptivezip.io.AntPathMatcher;
 import com.github.kvr000.adaptivezip.io.AnyOfPathMatcher;
 import com.github.kvr000.adaptivezip.io.Crc32CalculatingInputStream;
 import net.dryuf.concurrent.FutureUtil;
-import net.dryuf.concurrent.executor.CapacityResultSerializingExecutor;
+import net.dryuf.concurrent.executor.CapacityResultSequencingExecutor;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -168,7 +168,7 @@ public class AdaptiveZip {
 		AtomicReference<IOException> mainEx = new AtomicReference<>();
 		try (
 			ZipArchiveOutputStream archive = new ZipArchiveOutputStream(new File(arguments.archiveFilename));
-			CapacityResultSerializingExecutor executor = new CapacityResultSerializingExecutor(Runtime.getRuntime().maxMemory()*7/8, 128)
+			CapacityResultSequencingExecutor executor = new CapacityResultSequencingExecutor(Runtime.getRuntime().maxMemory()*7/8, 128)
 		) {
 			files.forEach((ImmutablePair<Path, Path> paths) -> {
 				FutureUtil.submitDirect(() -> Files.size(paths.getLeft()))

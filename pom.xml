@@ -46,7 +46,7 @@
 		<commons-cli.version>1.3.1</commons-cli.version>
 		<commons-compress.version>1.12</commons-compress.version>
 		<commons-io.version>2.11.0</commons-io.version>
-		<dryuf-concurrent.version>1.6.0</dryuf-concurrent.version>
+		<dryuf-base.version>1.7.2</dryuf-base.version>
 
 	</properties>
 
@@ -196,8 +196,8 @@
 
 		<dependency>
 			<groupId>net.dryuf</groupId>
-			<artifactId>dryuf-concurrent</artifactId>
-			<version>${dryuf-concurrent.version}</version>
+			<artifactId>dryuf-base</artifactId>
+			<version>${dryuf-base.version}</version>
 		</dependency>
 
 	</dependencies>

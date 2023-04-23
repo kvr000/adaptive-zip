@@ -21,6 +21,7 @@ import com.github.kvr000.adaptivezip.io.AnyOfPathMatcher;
 import com.github.kvr000.adaptivezip.io.Crc32CalculatingInputStream;
 import net.dryuf.base.concurrent.future.FutureUtil;
 import net.dryuf.base.concurrent.executor.CapacityResultSequencingExecutor;
+import net.dryuf.base.io.FilenameComparators;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -48,6 +49,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -221,7 +223,7 @@ public class AdaptiveZip {
 							.map(path -> new ImmutablePair<>(path, root.relativize(path)))
 							.filter((Pair<Path, Path> fileEntry) ->
 								!arguments.ignorePatterns.matches(fileEntry.getRight()))
-							.sorted();
+							.sorted(Comparator.comparing(Pair::getRight, FilenameComparators.dirFirstPathComparator()));
 					}
 					else if (Files.isRegularFile(root)) {
 						return Stream.of(new ImmutablePair<>(root, root));

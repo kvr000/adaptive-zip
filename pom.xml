@@ -23,7 +23,7 @@
 	<groupId>com.github.kvr000.adaptive-zip</groupId>
 	<artifactId>adaptive-zip</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>Adaptive Zip</name>
 	<description>Adaptive Zip main executable</description>
 
@@ -46,7 +46,7 @@
 		<commons-cli.version>1.3.1</commons-cli.version>
 		<commons-compress.version>1.12</commons-compress.version>
 		<commons-io.version>2.11.0</commons-io.version>
-		<dryuf-base.version>1.7.2</dryuf-base.version>
+		<dryuf-base.version>1.7.4</dryuf-base.version>
 
 	</properties>
 

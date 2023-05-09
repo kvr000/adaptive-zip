@@ -175,21 +175,21 @@ public class AdaptiveZip {
 			files.forEach((ImmutablePair<Path, Path> paths) -> {
 				FutureUtil.submitDirect(() -> Files.size(paths.getLeft()))
 					.thenCompose((Long size) ->
-						executor.submit(size, () -> buildRawEntry(arguments, paths))
-							.thenAccept((Pair<ZipArchiveEntry, InputStream> entry) -> {
+						executor.submit(
+							size,
+							() -> buildRawEntry(arguments, paths),
+							(entry) -> {
 								try {
 									Path old;
 									if ((old = seen.put(entry.getLeft().getName(), paths.getRight())) != null) {
 										System.err.println("Ignore duplicate entry: "+entry.getLeft().getName()+" old="+old+" new="+paths.getRight());
-										return;
+										return null;
 									}
 									System.err.println("\tadding: "+entry.getLeft().getName()+" ("+
 										(entry.getLeft().getSize() != 0 ? (entry.getLeft().getSize()-entry.getLeft().getCompressedSize())*100L/entry.getLeft().getSize() : 0)+"%)");
 										archive.addRawArchiveEntry(entry.getLeft(), entry.getRight());
 										entry.getRight().close();
-								}
-								catch (IOException e) {
-									throw new UncheckedIOException(e);
+									return null;
 								}
 								finally {
 									IOUtils.closeQuietly(entry.getRight());

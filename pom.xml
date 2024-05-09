@@ -28,7 +28,7 @@
 	<description>Adaptive Zip main executable</description>
 
 	<properties>
-		<javac.version>8</javac.version>
+		<javac.version>21</javac.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
@@ -37,16 +37,17 @@
 		<maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
 		<dryuf-executable-jar-maven-plugin.version>1.2.2</dryuf-executable-jar-maven-plugin.version>
 
-		<lombok.version>1.18.20</lombok.version>
+		<lombok.version>1.18.32</lombok.version>
 
 		<testng.version>6.14.3</testng.version>
 
 		<plexus-utils.version>3.4.1</plexus-utils.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-cli.version>1.3.1</commons-cli.version>
-		<commons-compress.version>1.12</commons-compress.version>
+		<commons-compress.version>1.26.1</commons-compress.version>
 		<commons-io.version>2.11.0</commons-io.version>
 		<dryuf-base.version>1.8.0</dryuf-base.version>
+		<dryuf-cmdline.version>1.1.0</dryuf-cmdline.version>
 
 	</properties>
 
@@ -198,6 +199,11 @@
 			<groupId>net.dryuf</groupId>
 			<artifactId>dryuf-base</artifactId>
 			<version>${dryuf-base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.dryuf</groupId>
+			<artifactId>dryuf-cmdline</artifactId>
+			<version>${dryuf-cmdline.version}</version>
 		</dependency>
 
 	</dependencies>

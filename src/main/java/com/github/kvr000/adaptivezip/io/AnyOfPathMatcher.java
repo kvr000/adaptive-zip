@@ -1,7 +1,5 @@
 package com.github.kvr000.adaptivezip.io;
 
-import org.codehaus.plexus.util.MatchPattern;
-
 import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.util.List;

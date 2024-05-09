@@ -6,12 +6,23 @@ Compressing zip utility which adapts the compression methods according to file t
 ## Usage
 
 ```
-usage: Usage: AdaptiveZip [options] zip-filename source-directories-roots...
- -h                         Help
-    --deflate-level <arg>   Compression level for deflate method
-    --ignore-pattern <arg>  Path ant-syntax pattern to ignore files (can be multiple)
-    --store-pattern <arg>   Path ant-syntax pattern to avoid compression (can be multiple)
-    --store-ratio <arg>     Ratio (percentage of compressed to original) to avoid compression, default is 90
+Usage: AdaptiveZip options... file...
+AdaptiveZip  - archiving tool
+
+Options:
+-f archive-filename                         output archive filename
+-t archive-type                             output archive type
+--include include-pattern                   file pattern to include
+--exclude exclude-pattern                   file pattern to exclude
+--store-pattern file-pattern                file pattern to store
+--store-ratio percent                       compression ratio to avoid
+                                            compression (default is 10)
+-z|--compression-level compression-level    compression level (1-9, can be more
+                                            for specific compressions)
+--root directory                            add files from the directory
+
+Parameters:
+file...    files to directly add
 ```
 
 
@@ -22,7 +33,7 @@ compression for `*.class` and `*.gz` files or, for anything where the achieved c
 original size.
 
 ```
-java -jar target/AdaptiveZip.jar --deflate-level 9 --ignore-pattern '**/target/**/*' --store-pattern '**/*.class' --store-pattern '**/*.gz' --store-ratio 10 target/a.zip src/main/java/ target/classes/
+java -jar target/AdaptiveZip.jar -z 9 -f target/a.zip --ignore '**/target/**/*' --store-pattern '**/*.class' --store-pattern '**/*.gz' --store-ratio 10 src/main/java/ target/classes/
 Adding com/github/kvr000/adaptivezip/AdaptiveZip.java (70%)
 Adding com/github/kvr000/adaptivezip/concurrent/ResultSerializingExecutor.java (72%)
 Adding com/github/kvr000/adaptivezip/io/AntPathMatcher.java (0%)
